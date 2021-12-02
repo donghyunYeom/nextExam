@@ -8,10 +8,6 @@ import Nav from './components/Nav'
 export default function Home() {
   return (
     <div className = {styles.container} > 
-      Hello<br />
-      <Link href="/post/post.js">
-        click this~
-      </Link>
       <Header />
       <Nav />
     </div>

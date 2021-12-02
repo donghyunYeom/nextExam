@@ -1,14 +1,12 @@
 
 import Link from 'next/link'
-
+import Header from '../components/Header'
 
 export default function Post() {
     return (
-      <div className = {styles.container} > 
-        Hello<br />
-        <Link href="/post/index.js">
-          click this~
-        </Link>
+      <div> 
+        <Header />
+
       </div>
     )
   }
