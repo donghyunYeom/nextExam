@@ -24,12 +24,14 @@ function Homema(){
                     </div>
                 </div>
                 <div className="cursor-pointer group mr-20 inline-block">
+                    <a href="https://discord.com/invite/TCWsj9QDZ7" target="_blank">
                     <StarIcon className="h-8 group-hover:animate-spin"/>
                     <span className="opacity-0 group-hover:opacity-100 tracking-widest">REALV</span>
                     <span className="opacity-0 group-hover:opacity-100 tracking-widest">리얼뷔</span>
                     <div class="">
                         <img class="w-96 rounded-full" src="/image/real.png" alt="test" />
                     </div>
+                    </a>
                 </div>
                 <div className="cursor-pointer group mr-20 inline-block">
                     <SupportIcon className="h-8 group-hover:animate-spin"/>
