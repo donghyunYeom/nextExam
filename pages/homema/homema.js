@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import Image from 'next/image'
+import { ssApi } from '../api/index'
 
 import {
     HeartIcon,
@@ -7,8 +8,15 @@ import {
     SupportIcon
 } from "@heroicons/react/outline"
 
-function Homema(){
+//  let detail = ssApi.GetList();
+//  console.log(detail);
+
+
+const Homema = (props) => {
+    const homema = props.detail;
     const router = useRouter();
+
+    console.log()
 
     return (
                
@@ -26,7 +34,7 @@ function Homema(){
                 <div className="cursor-pointer group mr-20 inline-block">
                     <a href="https://discord.com/invite/TCWsj9QDZ7" target="_blank">
                     <StarIcon className="h-8 group-hover:animate-spin"/>
-                    <span className="opacity-0 group-hover:opacity-100 tracking-widest">REALV</span>
+                    <span className="opacity-0 group-hover:opacity-100 tracking-widest">{homema[0].name}</span><br />
                     <span className="opacity-0 group-hover:opacity-100 tracking-widest">리얼뷔</span>
                     <div className="">
                         <img className="w-96 rounded-full" src="/image/real.png" alt="test" />
@@ -61,43 +69,30 @@ function Homema(){
     )
 }
 
+export async function getServerSideProps(context) {
+   
+    let detail = await ssApi.GetList();
+ 
+    return {
+      props: {
+        //sidoList : sidoList,
+        detail: detail,
+      },
+    };
+  }
+
+// export async function list() {
+//     try {
+//         const result = await excuteQuery({
+//             query: 'SELECT * FROM homema where idx = ?',
+//             values: 1,
+//         });
+
+//         console.log(result)
+//         return result[0];
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
 export default Homema
-
-
-
-{/* <div class="flex flex-row w-screen md:max-w-screen-lg">
-                <div className="cursor-pointer group mr-20 flex-1 w-auto">
-                    <HeartIcon className="h-8 group-hover:animate-bounce"/>
-                    <span className="opacity-0 group-hover:opacity-100 tracking-widest">Nuna_V</span>
-                    <span className="opacity-0 group-hover:opacity-100 tracking-widest">누나뷔</span>
-                    <div class="w-full h-full">
-                        <img class="w-auto" src="/image/nuna.png" alt="test" />
-                    </div>
-                </div>
-                <div className="cursor-pointer group mr-20 flex-1">
-                    <a href="https://discord.com/invite/TCWsj9QDZ7" target="_blank">
-                    <StarIcon className="h-8 group-hover:animate-spin"/>
-                    <span className="opacity-0 group-hover:opacity-100 tracking-widest">REALV</span>
-                    <span className="opacity-0 group-hover:opacity-100 tracking-widest">리얼뷔</span>
-                    <div class="w-full h-full">
-                        <img class="w-auto" src="/image/real.png" alt="test" />
-                    </div>
-                    </a>
-                </div>
-                <div className="cursor-pointer group mr-20 flex-1">
-                    <SupportIcon className="h-8 group-hover:animate-spin"/>
-                    <span className="opacity-0 group-hover:opacity-100 tracking-widest">RULER_V</span>
-                    <span className="opacity-0 group-hover:opacity-100 tracking-widest">룰러뷔</span>
-                    <div class="w-full h-full">
-                        <img class="w-auto" src="/image/ruler.jpeg" alt="test" />
-                    </div>
-                </div>
-                <div className="cursor-pointer group mr-20 flex-1">
-                    <SupportIcon className="h-8 group-hover:animate-spin"/>
-                    <span className="opacity-0 group-hover:opacity-100 tracking-widest">RULER_V</span>
-                    <span className="opacity-0 group-hover:opacity-100 tracking-widest">룰러뷔</span>
-                    <div class="w-full h-full">
-                        <img class="w-auto" src="/image/ruler.jpeg" alt="test" />
-                    </div>
-                </div>
-            </div>  */}
