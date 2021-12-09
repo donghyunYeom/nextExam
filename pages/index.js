@@ -11,7 +11,8 @@ export default function Home() {
     <div className = {styles.container} > 
       <Header />
       <Nav />
-      <Homema />
+      {/* <Header /> */}
+      <div><a href="../homema/homema">팬 페이지 이동하기</a></div>
     </div>
   )
 }
