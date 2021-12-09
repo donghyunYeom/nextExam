@@ -27,8 +27,7 @@ const Homema = (props) => {
     }
 
     const shortUrl = async (shortUrl) =>{
-
-        console.log(shortUrl);
+        (document.getElementById("search_keyword")).value = shortUrl;
     }
       
 
@@ -69,8 +68,6 @@ const Homema = (props) => {
 export async function getServerSideProps(context) {
    
     let detail = await ssApi.GetList();
-
-    console.log(detail)
  
     return {
       props: {
