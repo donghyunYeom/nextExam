@@ -3,6 +3,9 @@ module.exports = {
   images: {
     domains: ['duckzill-resource.s3.ap-northeast-2.amazonaws.com'],
   },
+  shortUrl:{
+    domains: ['https://openapi.naver.com/v1/util/shorturl'],
+  },
   env: {
     'MYSQL_HOST': '127.0.0.1',
     'MYSQL_PORT': '3306',

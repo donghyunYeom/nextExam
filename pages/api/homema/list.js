@@ -2,11 +2,7 @@ import excuteQuery from '../../../libs/db';
 
 export default async (req, res) => {
     
-    //console.log(req);
-    //console.log(res);
     const keyword = req.body.keyword;
-    console.log(keyword);
-
     
     try {
         var query = "";
@@ -20,10 +16,98 @@ export default async (req, res) => {
             //values: 1,
         });
         //return result[0];
+        
+
+        for (let index = 0; index < result.length; index++) {
+            var item = result[index];
+            let short='';
+            var client_id = 'YCVXKRjnXwzhd5_sOsmW';//개발자센터에서 발급받은 Client ID
+            var client_secret = 'jFGIY47Id5'; //개발자센터에서 발급받은 Client Secret
+            var query = encodeURI(item.discord);
+            const axios = require('axios');
+
+            let config = {
+            method: 'GET',
+            url: 'https://openapi.naver.com/v1/util/shorturl?url='+query,
+                headers: {
+                    'X-Naver-Client-Id':client_id,
+                    'X-Naver-Client-Secret': client_secret
+                },
+            json: true
+            };
+
+            try{
+                var response = await axios(config);
+                result[index]['shortUrl'] = response.data.result.url 
+                    //강제로 넘김
+                
+
+            }catch(error){
+                console.error(error.response.data);  
+            }
+            
+        }
+
         res.status(200).json( result )
+
     } catch (error) {
         console.log(error);
     }
 
     
+
+    
 }
+
+
+
+// result.forEach(function(item,index){
+        //     //console.log(result[index]['discord'])
+
+        //     ///////////////////////////////////////////
+        //     let short='';
+        //     var client_id = 'YCVXKRjnXwzhd5_sOsmW';//개발자센터에서 발급받은 Client ID
+        //     var client_secret = 'jFGIY47Id5'; //개발자센터에서 발급받은 Client Secret
+        //     var query = encodeURI(item.discord);
+        //     const axios = require('axios');
+
+        //     let config = {
+        //     method: 'GET',
+        //     url: 'https://openapi.naver.com/v1/util/shorturl?url='+query,
+        //         headers: {
+        //             'X-Naver-Client-Id':client_id,
+        //             'X-Naver-Client-Secret': client_secret
+        //         },
+        //     json: true
+        //     };
+
+        //     try{
+        //         axios(config).then(function (response) {
+        //             //short = response.data.result.url;
+        //             result[index]['shortUrl'] = response.data.result.url 
+
+
+        //             //강제로 넘김
+        //             res.status(200).json( result )
+        //         });
+
+        //     }catch(error){
+        //         console.error(error.response.data);  
+        //     }
+
+            
+        //     ///////////////////////////////////////////
+        // });
+
+        //console.log(result);
+
+
+
+
+
+
+
+
+
+
+
