@@ -13,5 +13,6 @@ module.exports = {
     'MYSQL_USER': 'root',
     'MYSQL_PASSWORD': 'ejrwlf2021',
     'NEXTAUTH_URL': 'http://localhost:3000/',
+    //'KAKAO_API_KEY': 'c063be17296e1c7973d558319b0ebe5a',
   },
 }
