@@ -97,7 +97,7 @@ const Homema = (props) => {
             <div className="w-auto md:flex mt-20" >
             <div className="md:flex-shrink-0"></div>
                 {homema.map((homema) => (
-                <div className="cursor-pointer group mr-20 inline-block">
+                <div className="cursor-pointer group mr-20 inline-block" key={homema.idx}>
                     <HeartIcon className="h-8 group-hover:animate-bounce"/>
                     <span className="opacity-0 group-hover:opacity-100 tracking-widest">{homema.name}</span><br />
                     <span className="opacity-0 group-hover:opacity-100 tracking-widest">{homema.nameKo}</span>
