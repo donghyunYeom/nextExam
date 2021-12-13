@@ -36,7 +36,7 @@ const Homema = (props) => {
             setIsCopied(false);
         }, 1000);
         if( setIsCopied ){
-            alert("클립보드에 복사되었습니다!!");
+            alert("클립보드에 복사되었습니다!! Ctrl+V 로 사용하세요");
         }
     }
     
