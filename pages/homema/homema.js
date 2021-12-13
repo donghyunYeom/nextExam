@@ -2,8 +2,8 @@ import Image from 'next/image'
 import { ssApi } from '../api/index'
 import Header from '../components/Header'
 import {useState, useEffect} from 'react';
-//import { useRouter } from "next/router"
-import useSWR from 'swr'
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 
 import {
     HeartIcon,
@@ -15,6 +15,8 @@ const Homema = (props) => {
     //const homema = props.detail;
     
     const [homema,setHome] = useState(props.detail);
+    const [isCopied, setIsCopied] = useState(false);
+    
     const afrerSearch = async (keyword) => {
         window.scrollTo(0,0)
         const res = await ssApi.GetList({keyword: keyword})
@@ -26,14 +28,23 @@ const Homema = (props) => {
         afrerSearch(keyword);
     }
 
-    const shortUrl = async (shortUrl) =>{
-        (document.getElementById("search_keyword")).value = shortUrl;
+    const shortUrl = async () =>{
+        //(document.getElementById("search_keyword")).value = shortUrl;
+        //console.log(shortUrl)
+        setIsCopied(true);
+        setTimeout(() => {
+            setIsCopied(false);
+        }, 1000);
+        if( setIsCopied ){
+            alert("클립보드에 복사되었습니다!!");
+        }
     }
+    
 
     const Explain = 
   useEffect(() => {
-      //Kakao.init(process.env.KAKAO_API_KEY);
-      Kakao.init("c063be17296e1c7973d558319b0ebe5a");
+      Kakao.init(process.env.KAKAO_API_KEY);
+      //Kakao.init("c063be17296e1c7973d558319b0ebe5a");
   }, []);
 
     const shareKakao = (name, image, url) => {
@@ -93,9 +104,21 @@ const Homema = (props) => {
                     <div className="">
                         <img className="w-96 rounded-full" src={homema.imagePath} alt="test" />
                     </div>
-                    <div onClick={()=> shortUrl(homema.shortUrl) } >단축url</div>
+                    {/* <div onClick={()=> shortUrl(homema.shortUrl) } >단축url</div> */}
+                    {/* <CopyToClipboard onCopy={ console.log("copy!!! " + homema.shortUrl) } text={homema.shortUrl}  > */}
+                    <CopyToClipboard onCopy={ shortUrl } text={homema.shortUrl}  >
+                        <button>단축url 복사</button>
+                    </CopyToClipboard>
+
+                    {/* {this.state.copied ? <span style={{color: 'red'}}>Copied.</span> : null} */}
+                    
+
                     <div onClick={()=> shareKakao(homema.name, homema.imagePath, homema.shortUrl) } >카카오톡 공유</div>
                     <div onClick={()=> shareTwitter(homema.name, homema.imagePath, homema.shortUrl) } >트위터 공유</div>
+
+                    {/* <span className={` ${isCopied ? "" : "hidden"}`} >
+                        Copied!
+                    </span> */}
                 </div>
                 ))}
             </div> 
