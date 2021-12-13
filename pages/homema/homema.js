@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { ssApi } from '../api/index'
 import Header from '../components/Header'
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 //import { useRouter } from "next/router"
 import useSWR from 'swr'
 
@@ -30,18 +30,41 @@ const Homema = (props) => {
         (document.getElementById("search_keyword")).value = shortUrl;
     }
 
-    // Kakao.Link.createDefaultButton({
-    //     container: '#create-kakao-link-btn',
-    //     objectType: 'text',
-    //     text:
-    //       '기본 템플릿으로 제공되는 텍스트 템플릿은 텍스트를 최대 200자까지 표시할 수 있습니다. 텍스트 템플릿은 텍스트 영역과 하나의 기본 버튼을 가집니다. 임의의 버튼을 설정할 수도 있습니다. 여러 장의 이미지, 프로필 정보 등 보다 확장된 형태의 카카오링크는 다른 템플릿을 이용해 보낼 수 있습니다.',
-    //     link: {
-    //       mobileWebUrl:
-    //         'https://developers.kakao.com',
-    //       webUrl:
-    //         'https://developers.kakao.com',
-    //     },
-    //   });
+    const Explain = 
+  useEffect(() => {
+      //Kakao.init(process.env.KAKAO_API_KEY);
+      Kakao.init("c063be17296e1c7973d558319b0ebe5a");
+  }, []);
+
+    const shareKakao = (name, image, url) => {
+    Kakao.Link.sendDefault({
+        objectType: "feed",
+        content: {
+            title: name+" Discord",
+            description: name+" Discord",
+            imageUrl: image,
+            link: {
+            mobileWebUrl: url,
+            androidExecParams: "Discord",
+            },
+        },
+        buttons: [
+            {
+            title: "Discord로 이동",
+            link: {
+                mobileWebUrl: url,
+            },
+            },
+        ],
+    });
+    }
+
+    //twitter
+    function shareTwitter(name, image, url) {
+        var sendText = name; // 전달할 텍스트
+        var sendUrl = url; // 전달할 URL
+        window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+    }
       
 
     return (
@@ -71,7 +94,8 @@ const Homema = (props) => {
                         <img className="w-96 rounded-full" src={homema.imagePath} alt="test" />
                     </div>
                     <div onClick={()=> shortUrl(homema.shortUrl) } >단축url</div>
-                    {/* <div onClick={()=> Kakao.Link.createDefaultButton(homema.shortUrl) } >단축url 공유</div> */}
+                    <div onClick={()=> shareKakao(homema.name, homema.imagePath, homema.shortUrl) } >카카오톡 공유</div>
+                    <div onClick={()=> shareTwitter(homema.name, homema.imagePath, homema.shortUrl) } >트위터 공유</div>
                 </div>
                 ))}
             </div> 

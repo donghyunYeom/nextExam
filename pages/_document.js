@@ -10,10 +10,11 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-            <script
+            {/* <script
                 defer
                 src="https://developers.kakao.com/sdk/js/kakao.min.js"
-            ></script>
+            ></script> */}
+            <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
         </Head>
         <body>
           <Main />
